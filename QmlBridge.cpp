@@ -38,7 +38,7 @@ void QMLBridge::registerObserver(QmlBridgeObserver* observer)
     m_qmlBridgeObservers.push_back(observer);
 }
 
-void QMLBridge::notifyGridIndexChanged(int index)
+void QMLBridge::notifyGridIndexChanged(const int index)
 {
     for (QmlBridgeObserver* observer : m_qmlBridgeObservers)
     {

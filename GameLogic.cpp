@@ -21,7 +21,7 @@ GameLogic::GameLogic(QMLBridge& bridge, QGuiApplication& app, QQmlApplicationEng
     m_qmlBridge.registerObserver(this);
 }
 
-void GameLogic::gridIndexChanged(int index)
+void GameLogic::gridIndexChanged(const int index)
 {
     m_counter++;
     GameLogic::Player player = getPlayer();
@@ -69,7 +69,7 @@ void GameLogic::handleVictory(GameLogic::Player player)
 
 GameLogic::Player GameLogic::getPlayer()
 {
-    int modulo = m_counter % 2;
+    const int modulo = m_counter % 2;
 
     if (modulo == 1)
     {

@@ -27,7 +27,7 @@ public slots:
     void playAgain();
 
 private:
-    void notifyGridIndexChanged(int index);
+    void notifyGridIndexChanged(const int index);
     void notifyExitGame();
     void notifyPlayAgain();
 

@@ -19,7 +19,7 @@ public:
     GameLogic(QMLBridge& backEnd, QGuiApplication& app, QQmlApplicationEngine& engine);
 
     // From QmlBridgeObserver
-    void gridIndexChanged(int index);
+    void gridIndexChanged(const int index);
     void exitGame();
     void playAgain();
 
