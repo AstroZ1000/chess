@@ -10,7 +10,7 @@ Window {
 
     property int counter: 0
 
-    Rectangle {
+    Rectangle {        
         anchors.fill: parent
         width: 600
         height: 600
@@ -26,7 +26,8 @@ Window {
 
             Repeater {
                 model: 9
-                Rectangle {
+
+                Rectangle {                    
                     width: gridLayout.width / 3
                     height: gridLayout.height / 3
                     color: "lightblue"
@@ -80,6 +81,7 @@ Window {
                 text: "Yes SIR!"
                 onClicked: {
                     gameOverDialog.close()
+                    QMLBridge.playAgain()
                 }
             }
 
@@ -87,6 +89,7 @@ Window {
                 text: "Hell NO!"
                 onClicked: {
                     gameOverDialog.close()
+                    QMLBridge.exitGame()
                 }
             }
         }

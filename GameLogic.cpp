@@ -1,8 +1,11 @@
 #include "GameLogic.h"
 #include <QDebug>
+#include <QQuickWindow>
 
-GameLogic::GameLogic(QMLBridge& bridge)
+GameLogic::GameLogic(QMLBridge& bridge, QGuiApplication& app, QQmlApplicationEngine& engine)
     : m_qmlBridge(bridge)
+    , m_guiApplication(app)
+    , m_qmlApplicationEngine(engine)
     , m_counter(0)
 
     // Grid indexes
@@ -18,9 +21,7 @@ GameLogic::GameLogic(QMLBridge& bridge)
     m_qmlBridge.registerObserver(this);
 }
 
-// TODO: make destructor and remove observer
-
-void GameLogic::gridIndexUpdated(int index)
+void GameLogic::gridIndexChanged(int index)
 {
     m_counter++;
     GameLogic::Player player = getPlayer();
@@ -90,7 +91,7 @@ bool GameLogic::isVictory(const std::vector<int>& moves, GameLogic::Player playe
         qDebug() << "winning combination: " << combination;
         bool victory = true;
 
-        for (int value : combination) {
+        for (const int value : combination) {
 
             qDebug() << "value: " << value;
 
@@ -108,3 +109,18 @@ bool GameLogic::isVictory(const std::vector<int>& moves, GameLogic::Player playe
 
     return false;
 }
+
+void GameLogic::exitGame()
+{
+    m_guiApplication.quit();
+}
+
+void GameLogic::playAgain()
+{
+    m_playerOneMoves.clear();
+    m_playerTwoMoves.clear();
+    m_counter = 0;
+    m_qmlApplicationEngine.clearComponentCache();
+    m_qmlApplicationEngine.load(QUrl(QStringLiteral("qrc:/Chess/Main.qml")));
+}
+

@@ -1,9 +1,11 @@
 #ifndef GAMELOGIC_H
 #define GAMELOGIC_H
 
-#include "QMLBridge.h"
-#include "QMLBridgeObserver.h"
+#include "QmlBridge.h"
+#include "QmlBridgeObserver.h"
 #include <vector>
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
 
 class GameLogic : public QmlBridgeObserver
 {
@@ -14,10 +16,12 @@ public:
         PLAYER_TWO
     };
 
-    GameLogic(QMLBridge& backEnd);
+    GameLogic(QMLBridge& backEnd, QGuiApplication& app, QQmlApplicationEngine& engine);
 
-    // From BackEndObserver
-    void gridIndexUpdated(int index);
+    // From QmlBridgeObserver
+    void gridIndexChanged(int index);
+    void exitGame();
+    void playAgain();
 
 private:
     GameLogic::Player getPlayer();
@@ -26,6 +30,8 @@ private:
 
 private:
     QMLBridge& m_qmlBridge;
+    QGuiApplication& m_guiApplication;
+    QQmlApplicationEngine& m_qmlApplicationEngine;
     int m_counter;
     const std::vector<std::vector<int>> m_winningCombinations;
     std::vector<int> m_playerOneMoves;

@@ -13,6 +13,7 @@ class QMLBridge : public QObject
 
 public:
     explicit QMLBridge(QObject *parent = nullptr);
+    ~QMLBridge();
 
     void registerObserver(QmlBridgeObserver* observer);
     void sendShowDialogSignal(const QString& message);
@@ -22,9 +23,13 @@ signals:
 
 public slots:
     void setGridIndex(const int index);
+    void exitGame();
+    void playAgain();
 
 private:
-    void notifyObservers(int index);
+    void notifyGridIndexChanged(int index);
+    void notifyExitGame();
+    void notifyPlayAgain();
 
 private:
     std::vector<QmlBridgeObserver*> m_qmlBridgeObservers;

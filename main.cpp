@@ -1,7 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include "QMLBridge.h"
+#include "QmlBridge.h"
 #include "GameLogic.h"
 
 int main(int argc, char *argv[])
@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     const QUrl url(u"qrc:/Chess/Main.qml"_qs);
 
     QMLBridge backEnd;
-    std::unique_ptr<GameLogic> gameLogic = std::make_unique<GameLogic>(backEnd);
+    std::unique_ptr<GameLogic> gameLogic = std::make_unique<GameLogic>(backEnd, app, engine);
 
     // Expose the C++ object to QML
     engine.rootContext()->setContextProperty("QMLBridge", &backEnd);

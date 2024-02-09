@@ -3,7 +3,9 @@
 
 class QmlBridgeObserver {
 public:
-    virtual void gridIndexUpdated(int index) = 0;
+    virtual void gridIndexChanged(int index) = 0;
+    virtual void exitGame() = 0;
+    virtual void playAgain() = 0;
 };
 
 #endif // QMLBRIDGEOBSERVER_H
