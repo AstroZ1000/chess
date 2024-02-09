@@ -15,10 +15,10 @@ public:
     explicit QMLBridge(QObject *parent = nullptr);
 
     void registerObserver(QmlBridgeObserver* observer);
-    void sendSignal();
+    void sendShowDialogSignal(const QString& message);
 
 signals:
-    void showDialog();
+    void showDialog(const QString& message);
 
 public slots:
     void setGridIndex(const int index);
@@ -27,7 +27,7 @@ private:
     void notifyObservers(int index);
 
 private:
-    std::vector<QmlBridgeObserver*> m_QMLBridgeObservers;
+    std::vector<QmlBridgeObserver*> m_qmlBridgeObservers;
 };
 
 #endif // QMLBRIDGE_H

@@ -12,12 +12,10 @@ int main(int argc, char *argv[])
     const QUrl url(u"qrc:/Chess/Main.qml"_qs);
 
     QMLBridge backEnd;
-
-    // TODO: make unique ptr
-    GameLogic gameLogic(backEnd);
+    std::unique_ptr<GameLogic> gameLogic = std::make_unique<GameLogic>(backEnd);
 
     // Expose the C++ object to QML
-    engine.rootContext()->setContextProperty("BackEnd", &backEnd);
+    engine.rootContext()->setContextProperty("QMLBridge", &backEnd);
 
     QObject::connect(
         &engine,

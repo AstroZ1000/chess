@@ -13,19 +13,19 @@ void QMLBridge::setGridIndex(const int index)
     notifyObservers(index);
 }
 
-void QMLBridge::sendSignal()
+void QMLBridge::sendShowDialogSignal(const QString& message)
 {
-    emit showDialog();
+    emit showDialog(message);
 }
 
 void QMLBridge::registerObserver(QmlBridgeObserver* observer)
 {
-    m_QMLBridgeObservers.push_back(observer);
+    m_qmlBridgeObservers.push_back(observer);
 }
 
 void QMLBridge::notifyObservers(int index)
 {
-    for (QmlBridgeObserver* observer : m_QMLBridgeObservers)
+    for (QmlBridgeObserver* observer : m_qmlBridgeObservers)
     {
         observer->gridIndexUpdated(index);
     }

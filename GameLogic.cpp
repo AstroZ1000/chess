@@ -1,8 +1,8 @@
 #include "GameLogic.h"
 #include <QDebug>
 
-GameLogic::GameLogic(QMLBridge& backEnd)
-    : m_backEnd(backEnd)
+GameLogic::GameLogic(QMLBridge& bridge)
+    : m_qmlBridge(bridge)
     , m_counter(0)
 
     // Grid indexes
@@ -15,7 +15,7 @@ GameLogic::GameLogic(QMLBridge& backEnd)
         {0, 3, 6}, {1, 4, 7}, {2, 5, 8},
         {0, 4, 8}, {2, 4, 6}})
 {
-    m_backEnd.registerObserver(this);
+    m_qmlBridge.registerObserver(this);
 }
 
 // TODO: make destructor and remove observer
@@ -57,10 +57,12 @@ void GameLogic::handleVictory(GameLogic::Player player)
     if (player == GameLogic::PLAYER_ONE)
     {
         qDebug() << "The winner is player one!";
+        m_qmlBridge.sendShowDialogSignal("Congratulations player CROSSES!!!\n Want to try again?");
     }
     else
     {
         qDebug() << "The winner is player two!";
+        m_qmlBridge.sendShowDialogSignal("Congratulations player NOUGHTS!!!\n Want to try again?");
     }
 }
 

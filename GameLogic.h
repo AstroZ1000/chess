@@ -25,7 +25,7 @@ private:
     void handleVictory(GameLogic::Player player);
 
 private:
-    QMLBridge& m_backEnd;
+    QMLBridge& m_qmlBridge;
     int m_counter;
     const std::vector<std::vector<int>> m_winningCombinations;
     std::vector<int> m_playerOneMoves;
