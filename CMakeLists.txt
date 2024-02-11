@@ -12,8 +12,8 @@ qt_standard_project_setup()
 
 qt_add_executable(appChess
     main.cpp
-    QmlBridge.cpp
-    QmlBridge.h
+    qml_bridge.cpp
+    qml_bridge.h
 )
 
 qt_add_qml_module(appChess
@@ -21,7 +21,7 @@ qt_add_qml_module(appChess
     VERSION 1.0
     QML_FILES Main.qml
     SOURCES game_logic.h game_logic.cpp
-    SOURCES QmlBridgeObserver.h
+    SOURCES qml_bridge_observer.h
     RESOURCES chess.qrc
     SOURCES
     SOURCES

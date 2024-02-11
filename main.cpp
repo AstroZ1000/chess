@@ -1,7 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include "QmlBridge.h"
+#include "qml_bridge.h"
 #include "game_logic.h"
 
 int main(int argc, char *argv[])

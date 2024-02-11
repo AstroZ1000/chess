@@ -1,5 +1,5 @@
-#ifndef QMLBRIDGEOBSERVER_H
-#define QMLBRIDGEOBSERVER_H
+#ifndef QML_BRIDGE_OBSERVER_H
+#define QML_BRIDGE_OBSERVER_H
 
 class QmlBridgeObserver {
 public:
@@ -8,4 +8,4 @@ public:
     virtual void playAgain() = 0;
 };
 
-#endif // QMLBRIDGEOBSERVER_H
+#endif // QML_BRIDGE_OBSERVER_H

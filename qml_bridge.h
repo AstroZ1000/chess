@@ -1,5 +1,5 @@
-#ifndef QMLBRIDGE_H
-#define QMLBRIDGE_H
+#ifndef QML_BRIDGE_H
+#define QML_BRIDGE_H
 
 #include <QObject>
 #include <qqml.h>
@@ -35,4 +35,4 @@ private:
     std::vector<QmlBridgeObserver*> m_qmlBridgeObservers;
 };
 
-#endif // QMLBRIDGE_H
+#endif // QML_BRIDGE_H

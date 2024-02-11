@@ -1,8 +1,8 @@
 #ifndef GAME_LOGIC_H
 #define GAME_LOGIC_H
 
-#include "QmlBridge.h"
-#include "QmlBridgeObserver.h"
+#include "qml_bridge.h"
+#include "qml_bridge_observer.h"
 #include <vector>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>

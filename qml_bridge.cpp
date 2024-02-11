@@ -1,6 +1,6 @@
-#include "QmlBridge.h"
+#include "qml_bridge.h"
 #include <QDebug>
-#include "QmlBridgeObserver.h"
+#include "qml_bridge_observer.h"
 
 QMLBridge::QMLBridge(QObject *parent) :
     QObject(parent)
