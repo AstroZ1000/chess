@@ -10,7 +10,7 @@ Window {
 
     property int counter: 0
 
-    Rectangle {        
+    Rectangle {
         anchors.fill: parent
         width: 600
         height: 600
@@ -25,9 +25,10 @@ Window {
             rowSpacing: 5
 
             Repeater {
+                id: repeater
                 model: 9
 
-                Rectangle {                    
+                Rectangle {
                     width: gridLayout.width / 3
                     height: gridLayout.height / 3
                     color: "lightblue"
@@ -64,7 +65,16 @@ Window {
                             console.log("Rectangle clicked: index = " + index + " + counter = " + counter);
                             QMLBridge.setGridIndex(index);
                         }
-                    }                                        
+                    }
+
+                    Connections {
+                        target: yesButton
+                        function onRefreshUi() {
+
+                            cross.visible = false;
+                            nought.visible = false;
+                        }
+                    }
                 }
             }
         }
@@ -78,15 +88,21 @@ Window {
         Row {
             spacing: 30
             Button {
+
+                signal refreshUi()
+
+                id: yesButton
                 text: "Yes SIR!"
+
                 onClicked: {
                     gameOverDialog.close()
+                    refreshUi()
                     QMLBridge.playAgain()
                 }
             }
 
             Button {
-                text: "Hell NO!"
+                text: "No way!"
                 onClicked: {
                     gameOverDialog.close()
                     QMLBridge.exitGame()
@@ -98,7 +114,7 @@ Window {
     Connections {
         target: QMLBridge
 
-        onShowDialog: {
+        function onShowDialog(message) {
             gameOverDialog.title = message
             gameOverDialog.open()
         }

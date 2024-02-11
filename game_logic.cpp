@@ -130,7 +130,5 @@ void GameLogic::playAgain()
     m_playerOneMoves.clear();
     m_playerTwoMoves.clear();
     m_counter = 0;
-    m_qmlApplicationEngine.clearComponentCache();
-    m_qmlApplicationEngine.load(QUrl(QStringLiteral("qrc:/Chess/Main.qml")));
 }
 
