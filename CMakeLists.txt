@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_AUTOMOC ON)
 
-find_package(Qt6 6.4 REQUIRED COMPONENTS Quick)
+find_package(Qt6 6.4 REQUIRED COMPONENTS Quick Widgets)
 
 qt_standard_project_setup()
 
@@ -20,9 +20,13 @@ qt_add_qml_module(appChess
     URI Chess
     VERSION 1.0
     QML_FILES Main.qml
-    SOURCES GameLogic.h GameLogic.cpp
+    SOURCES game_logic.h game_logic.cpp
     SOURCES QmlBridgeObserver.h
     RESOURCES chess.qrc
+    SOURCES
+    SOURCES
+    SOURCES hall_of_fame.h hall_of_fame.cpp
+    SOURCES record.h record.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -37,7 +41,7 @@ set_target_properties(appChess PROPERTIES
 )
 
 target_link_libraries(appChess
-    PRIVATE Qt6::Quick
+    PRIVATE Qt6::Quick Qt6::Widgets
 )
 
 include(GNUInstallDirs)

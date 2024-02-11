@@ -1,14 +1,16 @@
-#ifndef GAMELOGIC_H
-#define GAMELOGIC_H
+#ifndef GAME_LOGIC_H
+#define GAME_LOGIC_H
 
 #include "QmlBridge.h"
 #include "QmlBridgeObserver.h"
 #include <vector>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include "hall_of_fame.h"
 
 class GameLogic : public QmlBridgeObserver
 {
+
 public:
 
     enum Player {
@@ -16,7 +18,7 @@ public:
         PLAYER_TWO
     };
 
-    GameLogic(QMLBridge& backEnd, QGuiApplication& app, QQmlApplicationEngine& engine);
+    GameLogic(QMLBridge& bridge, QGuiApplication& app, QQmlApplicationEngine& engine);
 
     // From QmlBridgeObserver
     void gridIndexChanged(const int index);
@@ -36,6 +38,7 @@ private:
     const std::vector<std::vector<int>> m_winningCombinations;
     std::vector<int> m_playerOneMoves;
     std::vector<int> m_playerTwoMoves;
+    std::unique_ptr<HallOfFame> m_hallOfFame;
 };
 
-#endif // GAMELOGIC_H
+#endif // GAME_LOGIC_H

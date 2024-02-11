@@ -1,6 +1,7 @@
-#include "GameLogic.h"
+#include "game_logic.h"
 #include <QDebug>
 #include <QQuickWindow>
+
 
 GameLogic::GameLogic(QMLBridge& bridge, QGuiApplication& app, QQmlApplicationEngine& engine)
     : m_qmlBridge(bridge)
@@ -19,6 +20,7 @@ GameLogic::GameLogic(QMLBridge& bridge, QGuiApplication& app, QQmlApplicationEng
         {0, 4, 8}, {2, 4, 6}})
 {
     m_qmlBridge.registerObserver(this);
+    m_hallOfFame = std::make_unique<HallOfFame>(&app);
 }
 
 void GameLogic::gridIndexChanged(const int index)
@@ -58,12 +60,20 @@ void GameLogic::handleVictory(GameLogic::Player player)
     if (player == GameLogic::PLAYER_ONE)
     {
         qDebug() << "The winner is player one!";
-        m_qmlBridge.sendShowDialogSignal("Congratulations player CROSSES!!!\n Want to try again?");
+
+        QString name = "Player One";
+        QString message = m_hallOfFame->addEntry(name);
+
+        m_qmlBridge.sendShowDialogSignal(message);
     }
     else
     {
         qDebug() << "The winner is player two!";
-        m_qmlBridge.sendShowDialogSignal("Congratulations player NOUGHTS!!!\n Want to try again?");
+
+        QString name = "Player Two";
+        QString message = m_hallOfFame->addEntry(name);
+
+        m_qmlBridge.sendShowDialogSignal(message);
     }
 }
 
