@@ -35,7 +35,7 @@ Window {
 
                     Image {
                         id: cross
-                        source: "file:////home/astroz/projects/chess/Chess/images/cross.png"
+                        source: "file:////home/astroz/projects/Chess/images/cross.png"
                         anchors.fill: parent
                         fillMode: Image.PreserveAspectFit
                         visible: false
@@ -43,7 +43,7 @@ Window {
 
                     Image {
                         id: nought
-                        source: "file:////home/astroz/projects/chess/Chess/images/nought.png"
+                        source: "file:////home/astroz/projects/Chess/images/nought.png"
                         anchors.fill: parent
                         fillMode: Image.PreserveAspectFit
                         visible: false
@@ -96,6 +96,7 @@ Window {
 
                 onClicked: {
                     gameOverDialog.close()
+                    counter = 0
                     refreshUi()
                     QMLBridge.playAgain()
                 }
