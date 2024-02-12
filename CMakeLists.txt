@@ -19,14 +19,13 @@ qt_add_executable(appChess
 qt_add_qml_module(appChess
     URI Chess
     VERSION 1.0
-    QML_FILES Main.qml
+    QML_FILES
     SOURCES game_logic.h game_logic.cpp
     SOURCES qml_bridge_observer.h
-    RESOURCES chess.qrc
-    SOURCES
-    SOURCES
     SOURCES hall_of_fame.h hall_of_fame.cpp
     SOURCES record.h record.cpp
+    QML_FILES Main.qml
+    RESOURCES main.qrc
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

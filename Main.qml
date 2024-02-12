@@ -9,6 +9,7 @@ Window {
     title: qsTr("Antti's Noughts and Crosses")
 
     property int counter: 0
+    property var usedIndexes: []
 
     Rectangle {
         anchors.fill: parent
@@ -34,7 +35,18 @@ Window {
                     color: "lightblue"
 
                     Image {
+                        id: background
+                        // For some reason loading images from resources does not work
+                        source: "file:////home/astroz/projects/Chess/images/background_" + index + ".png"
+                        anchors.fill: parent
+                        fillMode: Image.PreserveAspectFit
+                        visible: true
+                    }
+
+                    Image {
                         id: cross
+                        // For some reason loading images from resources does not work
+                        // source: "qrc:/images/cross.png"
                         source: "file:////home/astroz/projects/Chess/images/cross.png"
                         anchors.fill: parent
                         fillMode: Image.PreserveAspectFit
@@ -43,27 +55,140 @@ Window {
 
                     Image {
                         id: nought
+                        // For some reason loading images from resources does not work
+                        // source: "qrc:/images/nought.png"
                         source: "file:////home/astroz/projects/Chess/images/nought.png"
                         anchors.fill: parent
                         fillMode: Image.PreserveAspectFit
                         visible: false
                     }
 
+                    function allowedIndex(value) {
+                        for (var i = 0; i < usedIndexes.length; i++) {
+                            if (usedIndexes[i] === value) {
+                                return false;
+                            }
+                        }
+
+                        return true;
+                    }
+
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
 
-                            counter++
+                            if (allowedIndex(index)) {
 
-                            let modulo = counter % 2
-                            if (modulo == 1) {
-                                cross.visible = true;
+                                usedIndexes.push(index);
+                                counter++;
+
+                                let modulo = counter % 2
+                                if (modulo == 1) {
+                                    background.visible = false;
+                                    crossAnimation.start();
+                                    crossSizeAnimation.start();
+                                } else {
+                                    background.visible = false;
+                                    noughtAnimation.start();
+                                    noughtSizeAnimation.start();
+                                }
+
+                                console.log("Rectangle clicked: index = " + index + " + counter = " + counter);
+                                QMLBridge.setGridIndex(index);
+
                             } else {
+                                console.log("Not allowed index = " + index);
+                            }
+                        }
+                    }
+
+                    SequentialAnimation {
+                        id: crossAnimation
+
+                        NumberAnimation {
+                            target: cross
+                            property: "opacity"
+                            duration: 250
+                            from: 1
+                            to: 0
+                        }
+                        ScriptAction {
+                            script: {
+                                cross.visible = true;
+                            }
+                        }
+                        NumberAnimation {
+                            target: cross
+                            property: "opacity"
+                            from: 0
+                            to: 1
+                            duration: 250
+                        }
+                    }
+
+                    SequentialAnimation {
+                        id: crossSizeAnimation
+
+                        NumberAnimation {
+                            target: cross
+                            property: "scale"
+                            from: 1
+                            to: 1.5
+                            duration: 250
+                            easing.type: Easing.InOutQuad
+                        }
+                        NumberAnimation {
+                            target: cross
+                            property: "scale"
+                            from: 1.5
+                            to: 1
+                            duration: 250
+                            easing.type: Easing.InOutQuad
+                        }
+                    }
+
+                    SequentialAnimation {
+                        id: noughtAnimation
+
+                        NumberAnimation {
+                            target: nought
+                            property: "opacity"
+                            duration: 250
+                            from: 1
+                            to: 0
+                        }
+                        ScriptAction {
+                            script: {
                                 nought.visible = true;
                             }
+                        }
+                        NumberAnimation {
+                            target: nought
+                            property: "opacity"
+                            from: 0
+                            to: 1
+                            duration: 250
+                        }
+                    }
 
-                            console.log("Rectangle clicked: index = " + index + " + counter = " + counter);
-                            QMLBridge.setGridIndex(index);
+                    SequentialAnimation {
+                        id: noughtSizeAnimation
+
+                        NumberAnimation {
+                            target: nought
+                            property: "scale"
+                            from: 1
+                            to: 1.5
+                            duration: 250
+                            easing.type: Easing.InOutQuad
+                        }
+                        NumberAnimation {
+                            target: nought
+                            property: "scale"
+                            from: 1.5
+                            to: 1
+                            duration: 250
+                            easing.type: Easing.InOutQuad
                         }
                     }
 
@@ -73,6 +198,7 @@ Window {
 
                             cross.visible = false;
                             nought.visible = false;
+                            background.visible = true;
                         }
                     }
                 }

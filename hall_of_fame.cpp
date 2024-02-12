@@ -3,7 +3,7 @@
 #include <QDateTime>
 #include <QJsonArray>
 #include <QJsonObject>
-#include <QJsonDocument>>
+#include <QJsonDocument>
 #include <QFile>
 
 HallOfFame::HallOfFame(QObject *parent)
