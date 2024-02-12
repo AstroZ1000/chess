@@ -63,7 +63,7 @@ Window {
                         visible: false
                     }
 
-                    function allowedIndex(value) {
+                    function isAllowedIndex(value) {
                         for (var i = 0; i < usedIndexes.length; i++) {
                             if (usedIndexes[i] === value) {
                                 return false;
@@ -77,7 +77,7 @@ Window {
                         anchors.fill: parent
                         onClicked: {
 
-                            if (allowedIndex(index)) {
+                            if (isAllowedIndex(index)) {
 
                                 usedIndexes.push(index);
                                 counter++;
