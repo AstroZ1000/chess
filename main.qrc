@@ -1,7 +1,15 @@
 <RCC>
-    <qresource>
-        <file>images/background_0.png</file>
-        <file>images/cross.png</file>
-        <file>images/nought.png</file>
+    <qresource prefix="/">
+        <file>images/blue.png</file>
+        <file>images/red.png</file>
+        <file>images/artboard_0.png</file>
+        <file>images/artboard_1.png</file>
+        <file>images/artboard_2.png</file>
+        <file>images/artboard_3.png</file>
+        <file>images/artboard_4.png</file>
+        <file>images/artboard_5.png</file>
+        <file>images/artboard_6.png</file>
+        <file>images/artboard_7.png</file>
+        <file>images/artboard_8.png</file>
     </qresource>
 </RCC>

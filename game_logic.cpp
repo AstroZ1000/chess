@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QQuickWindow>
 
+const static int MAX_TURNS = 9;
 
 GameLogic::GameLogic(QMLBridge& bridge, QGuiApplication& app, QQmlApplicationEngine& engine)
     : m_qmlBridge(bridge)
@@ -53,6 +54,11 @@ void GameLogic::gridIndexChanged(const int index)
     default:
         break;
     }
+
+    if (m_counter == MAX_TURNS)
+    {
+        handleVictory(DRAW);
+    }
 }
 
 void GameLogic::handleVictory(GameLogic::Player player)
@@ -66,11 +72,19 @@ void GameLogic::handleVictory(GameLogic::Player player)
 
         m_qmlBridge.sendShowDialogSignal(message);
     }
-    else
+    else if (player == GameLogic::PLAYER_TWO)
     {
         qDebug() << "The winner is player two!";
 
         QString name = "Player Two";
+        QString message = m_hallOfFame->addEntry(name);
+
+        m_qmlBridge.sendShowDialogSignal(message);
+    }
+    else {
+        qDebug() << "No winner! Draw!";
+
+        QString name = "No winner";
         QString message = m_hallOfFame->addEntry(name);
 
         m_qmlBridge.sendShowDialogSignal(message);

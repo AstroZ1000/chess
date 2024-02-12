@@ -36,8 +36,7 @@ Window {
 
                     Image {
                         id: background
-                        // For some reason loading images from resources does not work
-                        source: "file:////home/astroz/projects/Chess/images/background_" + index + ".png"
+                        source: "images/artboard_" + index + ".png"
                         anchors.fill: parent
                         fillMode: Image.PreserveAspectFit
                         visible: true
@@ -45,9 +44,7 @@ Window {
 
                     Image {
                         id: cross
-                        // For some reason loading images from resources does not work
-                        // source: "qrc:/images/cross.png"
-                        source: "file:////home/astroz/projects/Chess/images/cross.png"
+                        source: "images/blue.png"
                         anchors.fill: parent
                         fillMode: Image.PreserveAspectFit
                         visible: false
@@ -55,9 +52,7 @@ Window {
 
                     Image {
                         id: nought
-                        // For some reason loading images from resources does not work
-                        // source: "qrc:/images/nought.png"
-                        source: "file:////home/astroz/projects/Chess/images/nought.png"
+                        source: "images/red.png"
                         anchors.fill: parent
                         fillMode: Image.PreserveAspectFit
                         visible: false
@@ -222,6 +217,7 @@ Window {
 
                 onClicked: {
                     gameOverDialog.close()
+                    usedIndexes = []
                     counter = 0
                     refreshUi()
                     QMLBridge.playAgain()
