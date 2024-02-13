@@ -2,8 +2,6 @@
 #include <QDebug>
 #include <QQuickWindow>
 
-const static int MAX_TURNS = 9;
-
 GameLogic::GameLogic(QMLBridge& bridge, QGuiApplication& app, QQmlApplicationEngine& engine)
     : m_qmlBridge(bridge)
     , m_guiApplication(app)
@@ -38,6 +36,8 @@ void GameLogic::gridIndexChanged(const int index)
         {
             handleVictory(PLAYER_ONE);
         }
+
+        makeComputersMove();
         break;
     }
 
@@ -55,10 +55,48 @@ void GameLogic::gridIndexChanged(const int index)
         break;
     }
 
-    if (m_counter == MAX_TURNS)
+    if (m_counter == MAX_SLOTS)
     {
         handleVictory(DRAW);
     }
+}
+
+void GameLogic::makeComputersMove()
+{
+    qDebug() << "makeComputersMove()";
+
+    const int slot = findFreeSlot();
+    qDebug() << "makeComputersMove() found free slot: " << slot;
+
+    if (slot != INVALID_SLOT)
+    {
+        m_qmlBridge.sendComputersMove(slot);
+    }
+}
+
+int GameLogic::findFreeSlot()
+{
+    // Find free slot
+    for (int i = 0; i < MAX_SLOTS; i++)
+    {
+        bool found = false;
+        if (std::find(m_playerOneMoves.begin(), m_playerOneMoves.end(), i) != m_playerOneMoves.end())
+        {
+            found = true;
+        }
+
+        if (std::find(m_playerTwoMoves.begin(), m_playerTwoMoves.end(), i) != m_playerTwoMoves.end())
+        {
+            found = true;
+        }
+
+        if (found == false)
+        {
+            return i;
+        }
+    }
+
+    return -1;
 }
 
 void GameLogic::handleVictory(GameLogic::Player player)

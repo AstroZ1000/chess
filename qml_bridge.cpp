@@ -14,7 +14,7 @@ QMLBridge::~QMLBridge()
 
 void QMLBridge::setGridIndex(const int index)
 {
-    qDebug() << "Backend received index: " << index;
+    qDebug() << "QML bridge received index: " << index;
     notifyGridIndexChanged(index);
 }
 
@@ -31,6 +31,11 @@ void QMLBridge::playAgain()
 void QMLBridge::sendShowDialogSignal(const QString& message)
 {
     emit showDialog(message);
+}
+
+void QMLBridge::sendComputersMove(const int& index)
+{
+    emit computersMove(index);
 }
 
 void QMLBridge::registerObserver(QmlBridgeObserver* observer)

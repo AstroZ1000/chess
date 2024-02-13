@@ -13,6 +13,9 @@ class GameLogic : public QmlBridgeObserver
 
 public:
 
+    const static int MAX_SLOTS = 9;
+    const static int INVALID_SLOT = -1;
+
     enum Player {
         PLAYER_ONE,
         PLAYER_TWO,
@@ -30,6 +33,8 @@ private:
     GameLogic::Player getPlayer();
     bool isVictory(const std::vector<int>& moves, GameLogic::Player player);
     void handleVictory(GameLogic::Player player);
+    void makeComputersMove();
+    int findFreeSlot();
 
 private:
     QMLBridge& m_qmlBridge;

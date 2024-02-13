@@ -17,9 +17,11 @@ public:
 
     void registerObserver(QmlBridgeObserver* observer);
     void sendShowDialogSignal(const QString& message);
+    void sendComputersMove(const int& index);
 
 signals:
     void showDialog(const QString& message);
+    void computersMove(const int& index);
 
 public slots:
     void setGridIndex(const int index);

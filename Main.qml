@@ -68,32 +68,35 @@ Window {
                         return true;
                     }
 
+                    function makeMove(value) {
+                        if (isAllowedIndex(value)) {
+
+                            usedIndexes.push(value);
+                            counter++;
+
+                            let modulo = counter % 2
+                            if (modulo == 1) {
+                                background.visible = false;
+                                crossAnimation.start();
+                                crossSizeAnimation.start();
+                            } else {
+                                background.visible = false;
+                                noughtAnimation.start();
+                                noughtSizeAnimation.start();
+                            }
+
+                            console.log("Rectangle clicked: index = " + value + " + counter = " + counter);
+                            QMLBridge.setGridIndex(value);
+
+                        } else {
+                            console.log("Not allowed index = " + value);
+                        }
+                    }
+
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-
-                            if (isAllowedIndex(index)) {
-
-                                usedIndexes.push(index);
-                                counter++;
-
-                                let modulo = counter % 2
-                                if (modulo == 1) {
-                                    background.visible = false;
-                                    crossAnimation.start();
-                                    crossSizeAnimation.start();
-                                } else {
-                                    background.visible = false;
-                                    noughtAnimation.start();
-                                    noughtSizeAnimation.start();
-                                }
-
-                                console.log("Rectangle clicked: index = " + index + " + counter = " + counter);
-                                QMLBridge.setGridIndex(index);
-
-                            } else {
-                                console.log("Not allowed index = " + index);
-                            }
+                            makeMove(index);
                         }
                     }
 
@@ -194,6 +197,17 @@ Window {
                             cross.visible = false;
                             nought.visible = false;
                             background.visible = true;
+                        }
+                    }
+
+                    Connections {
+                        target: QMLBridge
+
+                        function onComputersMove(move) {
+                            if (move === index) {
+                                makeMove(index);
+                                console.log("Computer moved to index = " + move);
+                            }
                         }
                     }
                 }
