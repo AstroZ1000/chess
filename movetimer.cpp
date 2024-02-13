@@ -15,10 +15,16 @@ MoveTimer::MoveTimer(GameLogic* logic, QObject *parent)
 void MoveTimer::onTimer()
 {
     qDebug() << "onTimer()";
-    m_logic->makeComputersMove();
+    if (m_logic)
+    {
+        m_logic->makeComputersMove();
+    }
 }
 
 void MoveTimer::startTimer()
 {
-    m_timer->start(1000);
+    if (m_timer)
+    {
+        m_timer->start(1000);
+    }
 }
