@@ -30,6 +30,7 @@ qt_add_qml_module(appChess
     RESOURCES images/artboard_1.png images/artboard_2.png images/artboard_3.png
     RESOURCES images/artboard_4.png images/artboard_5.png images/artboard_6.png
     RESOURCES images/artboard_7.png images/artboard_8.png
+    SOURCES movetimer.h movetimer.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

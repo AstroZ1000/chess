@@ -7,6 +7,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "hall_of_fame.h"
+#include "movetimer.h"
 
 class GameLogic : public QmlBridgeObserver
 {
@@ -24,6 +25,8 @@ public:
 
     GameLogic(QMLBridge& bridge, QGuiApplication& app, QQmlApplicationEngine& engine);
 
+    void makeComputersMove();
+
     // From QmlBridgeObserver
     void gridIndexChanged(const int index);
     void exitGame();
@@ -33,7 +36,6 @@ private:
     GameLogic::Player getPlayer();
     bool isVictory(const std::vector<int>& moves, GameLogic::Player player);
     void handleVictory(GameLogic::Player player);
-    void makeComputersMove();
     int findFreeSlot();
 
 private:
@@ -45,6 +47,7 @@ private:
     std::vector<int> m_playerOneMoves;
     std::vector<int> m_playerTwoMoves;
     std::unique_ptr<HallOfFame> m_hallOfFame;
+    std::unique_ptr<MoveTimer> m_timer;
 };
 
 #endif // GAME_LOGIC_H

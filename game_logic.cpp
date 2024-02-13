@@ -20,6 +20,7 @@ GameLogic::GameLogic(QMLBridge& bridge, QGuiApplication& app, QQmlApplicationEng
 {
     m_qmlBridge.registerObserver(this);
     m_hallOfFame = std::make_unique<HallOfFame>(&app);
+    m_timer = std::make_unique<MoveTimer>(this, &app);
 }
 
 void GameLogic::gridIndexChanged(const int index)
@@ -38,7 +39,7 @@ void GameLogic::gridIndexChanged(const int index)
         }
         else
         {
-            makeComputersMove();
+            m_timer->startTimer();
         }
         break;
     }
