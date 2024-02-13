@@ -36,8 +36,10 @@ void GameLogic::gridIndexChanged(const int index)
         {
             handleVictory(PLAYER_ONE);
         }
-
-        makeComputersMove();
+        else
+        {
+            makeComputersMove();
+        }
         break;
     }
 
